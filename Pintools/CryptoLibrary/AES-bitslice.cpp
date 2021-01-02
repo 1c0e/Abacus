@@ -11,13 +11,16 @@
 #include <fstream>
 #include "pin.H"
 
+using namespace std;
+
 bool start_ins = FALSE;
 bool first_time = true;
-std::map<ADDRINT, string> opcmap;
+std::map<ADDRINT, std::string> opcmap;
 std::string function_name;
 FILE *fp;
 
 ofstream RTN_FP;
+
 
 // We don't combine rtn_recv and rtn_send together becasue we need compilers try to make them incline
 VOID static RTN_start(char *name, char *rtn_name, const unsigned char *key, uint32_t key_bytes)
@@ -117,7 +120,7 @@ VOID Instruction(INS ins, VOID *v)
     ADDRINT addr = INS_Address(ins);
     if (opcmap.find(addr) == opcmap.end())
     {
-        opcmap.insert(std::pair<ADDRINT, string>(addr, INS_Disassemble(ins)));
+        opcmap.insert(std::pair<ADDRINT, std::string>(addr, INS_Disassemble(ins)));
     }
 
     if (INS_IsMemoryRead(ins))

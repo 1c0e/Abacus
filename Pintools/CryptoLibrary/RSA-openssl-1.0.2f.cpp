@@ -14,11 +14,11 @@
 #include "./openssl-1.0.2f/include/openssl/bn.h"
 #include "./openssl-1.0.2f/crypto/rsa/rsa.h"
 
-using std::ofstream;
+using namespace std;
 
 bool start_ins = FALSE;
 bool first_time = true;
-std::map<ADDRINT, string> opcmap;
+std::map<ADDRINT, std::string> opcmap;
 std::string function_name;
 FILE *fp;
 
@@ -192,7 +192,7 @@ VOID Instruction(INS ins, VOID *v)
     ADDRINT addr = INS_Address(ins);
     if (opcmap.find(addr) == opcmap.end())
     {
-        opcmap.insert(std::pair<ADDRINT, string>(addr, INS_Disassemble(ins)));
+        opcmap.insert(std::pair<ADDRINT, std::string>(addr, INS_Disassemble(ins)));
     }
 
     if (INS_IsMemoryRead(ins))

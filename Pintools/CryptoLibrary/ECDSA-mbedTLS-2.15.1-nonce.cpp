@@ -14,12 +14,12 @@
 
 #include "mbedtls-2.15/mbedtls/ecdsa.h"
 
-using std::ofstream;
+using namespace std;
 
 bool capture_flag = false;
 bool function_flag = false;
 bool nonce_flag = false;
-std::map<ADDRINT, string> opcmap;
+std::map<ADDRINT, std::string> opcmap;
 std::string secret_function_name;
 std::string nonce_function_name;
 std::string caller_function_name;
@@ -231,7 +231,7 @@ VOID Instruction(INS ins, VOID *v)
     ADDRINT addr = INS_Address(ins);
     if (opcmap.find(addr) == opcmap.end())
     {
-        opcmap.insert(std::pair<ADDRINT, string>(addr, INS_Disassemble(ins)));
+        opcmap.insert(std::pair<ADDRINT, std::string>(addr, INS_Disassemble(ins)));
     }
 
     if (INS_IsMemoryRead(ins))

@@ -81,13 +81,13 @@ private:
   int symbol_num_cache = -1; // -1 means cache miss
 
 public:
-  int id;                  // a unique id for each value
-  ValueType val_type;      // value type: SYMBOL or CONCRETE
-  uint32_t concrete_value; // concrete value
+  const int id;                  // a unique id for each value
+  const ValueType val_type;      // value type: SYMBOL or CONCRETE
+  const uint32_t concrete_value; // concrete value
   uint32_t low_bit = 1;
   uint32_t high_bit = REGISTER_SIZE;
   static int idseed;
-  std::string info;
+  const std::string info;
   std::unique_ptr<Operation> opr = nullptr;
 
   uint32_t formula_cache_concrete_value;

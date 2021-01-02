@@ -14,7 +14,7 @@
 #include "./mbedtls-2.15/mbedtls/rsa.h"
 #include "pin.H"
 
-using std::ofstream;
+using namespace std;
 
 #if defined(TARGET_MAC)
 #define MALLOC "_malloc"
@@ -32,7 +32,7 @@ using std::ofstream;
 bool capture_flag = false;
 bool func_flag = false;
 int rtn_time = 0;
-std::map<ADDRINT, string> opcmap;
+std::map<ADDRINT, std::string> opcmap;
 std::string function_name;
 FILE *fp;
 
@@ -273,7 +273,7 @@ VOID static printFunctionName(char *rtn_name, char *module_name,
 VOID Instruction(INS ins, VOID *v) {
   ADDRINT addr = INS_Address(ins);
   if (opcmap.find(addr) == opcmap.end()) {
-    opcmap.insert(std::pair<ADDRINT, string>(addr, INS_Disassemble(ins)));
+    opcmap.insert(std::pair<ADDRINT, std::string>(addr, INS_Disassemble(ins)));
   }
 
   if (INS_IsMemoryRead(ins)) {

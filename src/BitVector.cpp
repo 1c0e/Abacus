@@ -182,35 +182,28 @@ int BitVector::idseed = 0;
 
 BitVector::BitVector(ValueType vty, const std::string &s_info)
     : opr(nullptr), val_type(vty), info(s_info), concrete_value(0),
-      formula_cache_concrete_value(0), flag_formula_cache_concrete(false) {
-  id = ++idseed;
-}
+      formula_cache_concrete_value(0), flag_formula_cache_concrete(false),
+      id(++idseed) {}
 
 BitVector::BitVector(ValueType vty, uint32_t con, bool Imm2SymState)
     : opr(nullptr), concrete_value(con), formula_cache_concrete_value(0),
-      flag_formula_cache_concrete(false) {
-  id = ++idseed;
-  val_type = Imm2SymState ? ValueType::SYMBOL : vty;
-}
+      flag_formula_cache_concrete(false), id(++idseed),
+      val_type(Imm2SymState ? ValueType::SYMBOL : vty) {}
 
 BitVector::BitVector(ValueType vty, uint32_t con, bool Imm2SymState,
                      uint32_t size)
     : opr(nullptr), concrete_value(con), low_bit(1), high_bit(size),
-      formula_cache_concrete_value(0), flag_formula_cache_concrete(false) {
-  id = ++idseed;
-  val_type = Imm2SymState ? ValueType::SYMBOL : vty;
-}
+      formula_cache_concrete_value(0), flag_formula_cache_concrete(false),
+      id(++idseed), val_type(Imm2SymState ? ValueType::SYMBOL : vty) {}
 
 BitVector::BitVector(ValueType vty, uint32_t con)
     : opr(nullptr), val_type(vty), concrete_value(con),
-      formula_cache_concrete_value(0), flag_formula_cache_concrete(false) {
-  id = ++idseed;
-}
+      formula_cache_concrete_value(0), flag_formula_cache_concrete(false),
+      id(++idseed) {}
 
 BitVector::BitVector(ValueType vty, std::unique_ptr<Operation> oper)
     : concrete_value(0), val_type(vty), formula_cache_concrete_value(0),
-      flag_formula_cache_concrete(false) {
-  id = ++idseed;
+      flag_formula_cache_concrete(false), id(++idseed) {
   opr = std::move(oper);
 }
 
@@ -218,8 +211,7 @@ BitVector::BitVector(ValueType vty, const std::string &symbol_info,
                      uint32_t size)
     : concrete_value(0), val_type(vty), info(symbol_info), low_bit(1),
       high_bit(size), formula_cache_concrete_value(0),
-      flag_formula_cache_concrete(false) {
-  id = ++idseed;
+      flag_formula_cache_concrete(false), id(++idseed) {
   assert(vty == ValueType::SYMBOL);
 }
 
@@ -473,7 +465,7 @@ uint32_t BitVector::bvidiv32_quo(uint32_t edx, uint32_t eax, uint32_t op2) {
   int64_t edx_eax_s = edx_eax;
   int64_t op = op2;
 
-  if (op == 0){
+  if (op == 0) {
     return 0xFFFFFFFFu;
   }
 
