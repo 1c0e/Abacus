@@ -12,11 +12,12 @@ give an estimation of the amount of the leaked information for each leakage site
 ## Getting Started
 
 ### Build Intructions
-**Supported OS**: Linux 18.04, Ubuntu 20.04, macOS Big Sur
+**Supported OS**: Linux 18.04, Ubuntu 20.04
 
 **Prerequistes**: 
 -  cmake 3.12 or newer
 -  pkg-config
+-  gcc-7
 
 Abacus is consisted of two components:
 -  A Pin tool
